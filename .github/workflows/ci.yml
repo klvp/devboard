@@ -6,7 +6,10 @@ name: CI
 
 on:
   push:
-    branches: ["klvp/advanced-practice"]
+    branches: [
+        # "klvp/advanced-practice",
+        "master",
+      ]
 
 jobs:
   frontend:
