@@ -80,6 +80,6 @@ jobs:
           tags: ${{ vars.DOCKERHUB_USERNAME }}/devboard-${{matrix.folders}}:latest
 
   call_deploy_workflow:
-    needs: [frontend-ci, backend-ci]
+    needs: [frontend-ci, backend-ci, build-and-push]
     uses: ./.github/workflows/cd.yml
     secrets: inherit
