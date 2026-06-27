@@ -6,7 +6,7 @@ name: CI
 
 on:
   push:
-    branches: ["matrix-ci"]
+    branches: ["master"]
 
 jobs:
   frontend-ci:
