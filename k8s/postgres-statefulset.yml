@@ -1,12 +1,13 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: devboard-postgres-deployment
+  name: devboard-postgres-statefulset
   namespace: devboard
   labels:
     app: devboard-postgres
 spec:
-  replicas: 1
+  serviceName: postgres
+  replicas: 3
   selector:
     matchLabels:
       app: devboard-postgres
@@ -51,6 +52,14 @@ spec:
         - name: init
           configMap: 
             name: postgres-init-config
-        - name: data
-          persistentVolumeClaim:
-            claimName: postgres-pvc
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+        namespace: devboard
+      spec:
+        storageClassName: manual
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 500Mi

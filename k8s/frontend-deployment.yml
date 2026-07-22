@@ -6,7 +6,7 @@ metadata:
   labels:
     app: devboard-frontend
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: devboard-frontend
@@ -20,4 +20,11 @@ spec:
         image: klvp/devboard-frontend
         ports:
         - containerPort: 4173
+        resources:
+          requests:
+            cpu: 10m
+            memory: 128Mi
+          limits:
+            cpu: 100m
+            memory: 256Mi
 
