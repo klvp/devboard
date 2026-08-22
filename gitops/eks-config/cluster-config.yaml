@@ -1,0 +1,37 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: klvp-eks-cluster
+  region: ap-south-2
+
+# Automatically enable OIDC for IAM Roles for Service Accounts (IRSA)
+iam:
+  withOIDC: true
+
+managedNodeGroups:
+  - name: klvp-eks-worker-nodes
+    instanceType: m7i-flex.large
+    desiredCapacity: 2
+    minSize: 1
+    maxSize: 3
+    volumeSize: 20
+    ssh:
+      enableSsm: true
+    labels: { role: worker }
+    tags:
+      nodegroup-role: worker
+
+addons:
+  - name: vpc-cni
+    version: latest
+  - name: coredns
+    version: latest
+  - name: kube-proxy
+    version: latest
+  - name: aws-ebs-csi-driver
+    version: latest
+    wellKnownPolicies:
+      ebsCSIController: true
+  - name: metrics-server
+    version: latest
