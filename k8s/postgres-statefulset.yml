@@ -55,9 +55,9 @@ spec:
   volumeClaimTemplates:
     - metadata:
         name: data
-        namespace: devboard
+        # namespace: devboard
       spec:
-        storageClassName: "gp2"
+        storageClassName: "gp3"
         accessModes:
           - ReadWriteOnce
         resources:
